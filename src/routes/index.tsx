@@ -24,7 +24,13 @@ export const Route = createFileRoute('/')({
   ] }), component: Index,
 });
 const match = original.match(/const RECIPES = (.*);/);
-const recipes: HomeRecipe[] = match ? JSON.parse(match[1]) : [];
+const recipes: HomeRecipe[] = match?.[1] ? JSON.parse(match[1]) : [];
+const featuredOrder = [13, 15, 49];
+recipes.sort((a,b) => {
+  const aIndex = featuredOrder.indexOf(a.id);
+  const bIndex = featuredOrder.indexOf(b.id);
+  return (aIndex < 0 ? 3 : aIndex) - (bIndex < 0 ? 3 : bIndex);
+});
 const seasonalProducts = {
   automne: [{name:'Potiron',image:pumpkin,tone:'apricot'}, {name:'Pomme',image:apple,tone:'pink'}, {name:'Châtaigne',image:chestnut,tone:'mint'}, {name:'Poire',emoji:'🍐',tone:'yellow'}],
   hiver: [{name:'Clémentine',emoji:'🍊',tone:'apricot'},{name:'Poireau',emoji:'🥬',tone:'mint'},{name:'Pomme',image:apple,tone:'pink'},{name:'Carotte',emoji:'🥕',tone:'yellow'}],
