@@ -142,3 +142,70 @@
     color: var(--color-foreground);
   }
 }
+
+/* FrigoChef home — holiday notebook / illustrated stickers */
+:root {
+  --background: oklch(0.985 0.012 94);
+  --foreground: oklch(0.29 0.055 166);
+  --primary: oklch(0.43 0.105 169);
+  --primary-foreground: oklch(0.99 0.01 94);
+  --home-paper: oklch(0.985 0.012 94);
+  --home-canvas: oklch(0.94 0.025 156);
+  --home-ink: oklch(0.29 0.055 166);
+  --home-green: oklch(0.43 0.105 169);
+  --home-coral: oklch(0.68 0.195 32);
+  --home-pink: oklch(0.91 0.06 357);
+  --home-mint: oklch(0.9 0.065 166);
+  --home-yellow: oklch(0.92 0.13 94);
+  --home-apricot: oklch(0.9 0.078 60);
+  --home-muted: oklch(0.52 0.035 162);
+  --home-white: oklch(1 0 0);
+  --home-line: oklch(0.91 0.018 94);
+  --home-shadow: 0 5px 0 color-mix(in oklab, var(--home-ink) 12%, transparent);
+  --home-sticker-shadow: 0 4px 0 color-mix(in oklab, var(--home-ink) 16%, transparent);
+  --home-modal-shade: color-mix(in oklab, var(--home-ink) 38%, transparent);
+}
+body { font-family: 'DM Sans', sans-serif; letter-spacing: 0; }
+.home-shell {min-height:100dvh;background:var(--home-canvas);color:var(--home-ink)}
+.home-page {width:100%;max-width:480px;margin:auto;min-height:100dvh;background:var(--home-paper);padding-bottom:100px;overflow:hidden}
+.home-cover {position:relative;padding:30px 26px 28px;background:var(--home-yellow);border-radius:0 0 48% 7% / 0 0 9% 4%;isolation:isolate;overflow:hidden}
+.home-cover h1,.home-cover h2,.home-section-heading h2,.season-card h3,.recipe-title {font-family:'Outfit',sans-serif;letter-spacing:0}
+.brand-line {display:flex;align-items:center;gap:10px;position:relative;z-index:2}
+.brand-line h1 {font-size:42px;line-height:1.05;font-weight:900;margin:0}
+.brand-line h1>span {color:var(--home-green)}
+.brand-line h1 .brand-dot {color:var(--home-coral)}
+.brand-flower {color:var(--home-coral);font-size:43px;line-height:1;transform:rotate(-12deg)}
+.cover-message {display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:0;align-items:center;position:relative;margin-top:28px;z-index:1}
+.hello {font-size:9px;font-weight:800;margin:0 0 10px;letter-spacing:1.2px;color:var(--home-green)}
+.cover-message h2 {font-size:25px;line-height:1.2;font-weight:700;margin:0;white-space:nowrap}
+.fridge-sticker {width:145px;height:145px;object-fit:contain;max-width:none;transform:rotate(10deg);margin-left:-10px;margin-top:-20px;margin-bottom:-10px}
+.cover-underline {display:block;width:88px;height:7px;border-bottom:4px solid var(--home-coral);border-radius:50%;margin-top:8px;transform:rotate(-3deg)}
+.cover-squiggle {position:absolute;width:140px;height:150px;right:-62px;top:-42px;border:27px solid var(--home-coral);border-radius:44% 60% 40% 55%;transform:rotate(35deg);z-index:-1}
+.tiny-spark {position:absolute;color:var(--home-green);font-size:23px}.spark-one{right:20px;top:87px;transform:rotate(15deg)}.spark-two{right:145px;bottom:20px;color:var(--home-coral);font-size:27px}
+.home-content {padding:0 24px}
+.home-cook {display:grid;grid-template-columns:48px minmax(0,1fr) 40px;width:100%;height:96px;gap:13px;white-space:normal;text-align:left;border-radius:25px;background:var(--home-green);color:var(--home-white);font-family:'Outfit',sans-serif;font-size:25px;font-weight:700;line-height:1.15;padding:18px;margin-top:22px;box-shadow:var(--home-shadow);transition:transform .2s}
+.home-cook .cook-symbol {width:47px;height:47px;display:grid;place-items:center;border:1px solid color-mix(in oklab,var(--home-white) 35%,transparent);border-radius:50%;transform:rotate(-12deg)}
+.home-cook .cook-symbol svg {width:26px;height:26px}.cook-arrow{width:36px;height:36px;border-radius:50%;background:var(--home-yellow);color:var(--home-ink);display:grid;place-items:center}.home-cook .cook-arrow svg{width:24px;height:24px}
+.taste-row {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:25px 0 30px;padding:0 2px}
+.taste-sticker {width:100%;height:91px;display:flex;flex-direction:column;gap:6px;position:relative;padding:12px 3px;border:3px solid var(--home-white);outline:1px solid var(--home-line);box-shadow:var(--home-sticker-shadow);color:var(--home-ink);font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;transition:transform .2s;white-space:normal}
+.taste-sticker svg {width:27px;height:27px}.savory{background:var(--home-apricot);border-radius:30% 28% 28% 30%;transform:rotate(-5deg)}.sweet{background:var(--home-pink);border-radius:30% 30% 26% 28%;transform:rotate(3deg)}.anything{background:var(--home-mint);border-radius:28% 30% 28% 26%;transform:rotate(-3deg)}
+.taste-sticker[aria-pressed=true] {outline:2px solid var(--home-green)}.taste-check{position:absolute;top:-7px;right:-5px;width:23px;height:23px;border-radius:50%;background:var(--home-green);color:var(--home-white);display:grid;place-items:center;border:2px solid var(--home-paper)}.taste-check svg{width:13px;height:13px}
+.home-section-heading {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}.home-section-heading h2 {font-size:26px;line-height:1.25;font-weight:800;margin:0;display:flex;align-items:center;gap:12px;min-width:0}.heading-spark {font-size:26px;color:var(--home-coral);font-weight:500;transform:rotate(15deg)}
+.season-label,.quick-label {display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;white-space:nowrap}.season-label {background:var(--home-apricot);padding:6px 10px;border-radius:18px}.season-label svg{width:13px;height:13px}.quick-label{color:var(--home-green)}.quick-label svg{width:14px;height:14px}
+.section-caption{font-size:12px;margin:5px 0 16px;color:var(--home-muted)}
+.season-scroll {display:flex;overflow-x:auto;gap:12px;margin:0 -24px;padding:0 24px 8px;scroll-snap-type:x mandatory;scrollbar-width:none}.season-scroll::-webkit-scrollbar{display:none}
+.season-card {width:127px;min-width:127px;height:153px;border-radius:23px;padding:9px 8px 12px;text-align:center;scroll-snap-align:center;animation:home-arrive .5s ease both}.season-card:nth-child(2){animation-delay:.08s}.season-card:nth-child(3){animation-delay:.16s}.apricot{background:var(--home-apricot)}.pink{background:var(--home-pink)}.mint{background:var(--home-mint)}.yellow{background:var(--home-yellow)}
+.produce-art {height:107px;display:grid;place-items:center}.produce-art img{width:110px;height:107px;object-fit:contain}.produce-art>span{font-size:65px}.season-card h3{font-size:17px;margin:6px 0 0;font-weight:600}
+.quick-section {margin-top:24px}.quick-section .section-caption{margin-bottom:15px}.quick-list {display:grid;gap:12px}
+.quick-recipe {display:grid;grid-template-columns:84px minmax(0,1fr) 22px;width:100%;height:105px;gap:13px;text-align:left;white-space:normal;padding:8px 13px 8px 8px;border:1px solid var(--home-line);border-radius:23px;background:var(--home-white);color:var(--home-ink);transition:transform .2s;animation:home-arrive .65s ease both}
+.quick-recipe:nth-child(2){animation-delay:.12s}.quick-recipe:nth-child(3){animation-delay:.24s}.recipe-art{height:87px;width:84px;display:grid;place-items:center;border-radius:17px}.recipe-art-0{background:var(--home-mint)}.recipe-art-1{background:var(--home-pink)}.recipe-art-2{background:var(--home-apricot)}.recipe-art img{width:82px;height:82px;object-fit:contain}.quick-recipe-text{display:flex;min-width:0;flex-direction:column;gap:8px}.recipe-title{font-size:18px;line-height:1.2;font-weight:650}.recipe-time{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--home-muted)}.recipe-time svg{height:12px;width:12px}.prep-label{font-size:9px;font-weight:400}.recipe-arrow{color:var(--home-green)}.recipe-arrow svg{width:20px;height:20px}
+.home-signoff {display:flex;justify-content:center;gap:7px;align-items:center;margin:25px 0 5px;color:var(--home-muted);font-size:10px}.home-signoff svg{width:14px;height:14px;color:var(--home-coral)}
+.home-navbar {position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:calc(78px + env(safe-area-inset-bottom,0px));padding:8px 9px calc(8px + env(safe-area-inset-bottom,0px));background:var(--home-white);border-top:1px solid var(--home-line);z-index:10}
+.home-nav-item {height:61px;width:100%;padding:0;gap:3px;display:flex;flex-direction:column;font-size:10px;color:var(--home-muted);font-weight:500;border-radius:0}.home-nav-item .nav-icon{width:42px;height:31px;display:grid;place-items:center;border-radius:14px}.home-nav-item svg{width:22px;height:22px;stroke-width:1.8}.home-nav-item[aria-current=page]{color:var(--home-green);font-weight:700}.home-nav-item[aria-current=page] .nav-icon{background:var(--home-mint)}.nav-active-dot{width:4px;height:4px;position:absolute;bottom:8px;background:var(--home-green);border-radius:50%}
+.legacy-screen {display:block;width:100%;height:100dvh;border:none;background:var(--home-paper)}
+.home-modal-backdrop{position:fixed;inset:0;background:var(--home-modal-shade);z-index:100;display:grid;place-items:center;padding:24px}.home-modal{position:relative;background:var(--home-paper);padding:35px 25px;border-radius:25px;max-width:350px;text-align:center}.home-modal>svg{width:35px;height:35px;color:var(--home-green)}.home-modal h2{font-family:'Outfit',sans-serif;font-size:26px}.home-modal p{font-size:14px;line-height:1.5;color:var(--home-muted)}.modal-close{position:absolute;right:8px;top:8px}
+@keyframes home-arrive{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.home-cook:active,.taste-sticker:active,.quick-recipe:active {transform:scale(.96)}
+@media(min-width:600px){.home-page{box-shadow:0 0 60px color-mix(in oklab,var(--home-ink) 8%,transparent)}.home-cover{padding-top:38px}}
+@media(max-width:380px){.home-content{padding:0 18px}.home-cover{padding-left:20px;padding-right:20px}.brand-line h1{font-size:37px}.cover-message{grid-template-columns:minmax(0,1fr) 98px}.cover-message h2{font-size:22px}.fridge-sticker{width:125px;height:125px}.home-section-heading h2{font-size:23px}.home-cook{font-size:23px;gap:10px;padding:15px;grid-template-columns:42px minmax(0,1fr) 34px}.home-cook .cook-symbol{width:42px;height:42px}.taste-row{gap:10px}.taste-sticker{font-size:15px}.quick-recipe{grid-template-columns:74px minmax(0,1fr) 18px;gap:10px}.recipe-art{width:74px}.recipe-art img{width:73px}.recipe-title{font-size:16px}.prep-label{display:none}.season-scroll{margin:0 -18px;padding-left:18px;padding-right:18px}}
+@media(prefers-reduced-motion:reduce){.season-card,.quick-recipe{animation:none}.home-cook,.taste-sticker,.quick-recipe{transition:none}}
