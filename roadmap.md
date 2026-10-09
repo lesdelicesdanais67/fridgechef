@@ -1,2 +1,2 @@
-- [ ] Refaire uniquement Mon frigo en conservant les ingrédients et le moteur de recettes existants.
-- [ ] Vérifier saisie, catégories, dates, sauvegarde, goûts et navigation sur téléphone.
+- [x] Refaire uniquement Mon frigo en conservant les ingrédients et le moteur de recettes existants.
+- [x] Vérifier saisie, catégories, dates, sauvegarde, goûts et navigation sur téléphone.
