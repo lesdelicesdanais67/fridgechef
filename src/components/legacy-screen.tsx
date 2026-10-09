@@ -1,25 +1,17 @@
 import { useEffect, useMemo } from 'react';
-import original from '@/lib/frigochef-original.html?raw';
+import { legacyDocumentFor } from '@/lib/legacy-document';
 
-export function LegacyScreen({ screen, recipeId, preference, onHome }: { screen: string; recipeId?: number | undefined; preference: string; onHome: () => void }) {
+export function LegacyScreen({ screen, recipeId, preference, onHome, onFridge, fromFridge=false }: { screen: string; recipeId?: number | undefined; preference: string; onHome: () => void; onFridge?:()=>void; fromFridge?:boolean }) {
   useEffect(() => {
     const listener = (event: MessageEvent) => {
       const frame = document.getElementById('original-frigochef') as HTMLIFrameElement | null;
-      if (event.source === frame?.contentWindow && event.data === 'frigochef-home') onHome();
+      if (event.source !== frame?.contentWindow) return;
+      if (event.data === 'frigochef-home' || event.data === 'frigochef-accueil') onHome();
+      if (event.data === 'frigochef-frigo') onFridge?.();
     };
     window.addEventListener('message', listener);
     return () => window.removeEventListener('message', listener);
-  }, [onHome]);
-  const legacyDocument = useMemo(() => original.replace('renderScreen();\nif("serviceWorker"', `
-state.screen=${JSON.stringify(screen)};
-state.recipesType=${JSON.stringify(preference === 'all' ? 'salé' : preference)};
-state.detailId=${recipeId ?? 'null'};
-state.cameFrom='accueil';
-const originalGoTab=goTab;
-goTab=function(id){if(id==='accueil'){parent.postMessage('frigochef-home','*');return;}originalGoTab(id)};
-const originalGoBack=goBack;
-goBack=function(){if(state.cameFrom==='accueil'){parent.postMessage('frigochef-home','*');return;}originalGoBack()};
-renderScreen();
-if("serviceWorker"`), [screen, recipeId, preference]);
+  }, [onHome,onFridge]);
+  const legacyDocument = useMemo(() => legacyDocumentFor({screen,recipeId,preference,fromFridge}), [screen, recipeId, preference,fromFridge]);
   return <iframe id="original-frigochef" title="FrigoChef" className="legacy-screen" srcDoc={legacyDocument} />;
 }
