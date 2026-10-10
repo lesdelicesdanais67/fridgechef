@@ -46,7 +46,7 @@ describe('Legacy recipe validation',()=>{
     if(!script)throw new Error('Missing legacy script');
     const localStorage={getItem:(key:string)=>key==='fc_ing'?JSON.stringify(['pomme','oeuf','lait','farine','pâtes','tomate']):null};
     const evaluate=new Function('localStorage','document','navigator','window','parent',script+';return {state,list:filteredRecettes(),score:matchCountFor};');
-    return evaluate(localStorage,{getElementById:()=>({innerHTML:''})},{},{},{postMessage:()=>{}}) as {state:{onlyAvailable:boolean;recipesType:string};list:{t:string}[];score:(r:unknown)=>number};
+    return evaluate(localStorage,{getElementById:()=>({innerHTML:''})},{},{addEventListener:()=>{}},{postMessage:()=>{}}) as {state:{onlyAvailable:boolean;recipesType:string};list:{t:string}[];score:(r:unknown)=>number};
   }
   it.each(['salé','sucré'])('validation respects %s selected on home',(taste)=>{
     const result=run(taste);
