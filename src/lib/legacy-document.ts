@@ -16,6 +16,8 @@ const originalGoTab=goTab;
 goTab=function(id){if(id==='accueil'||id==='frigo'){parent.postMessage('frigochef-'+id,'*');return;}originalGoTab(id)};
 const originalGoBack=goBack;
 goBack=function(){if(state.cameFrom==='accueil'||state.cameFrom==='frigo'){parent.postMessage('frigochef-'+state.cameFrom,'*');return;}originalGoBack()};
+openDetail=function(id){parent.postMessage({type:'frigochef-recipe',id},'*')};
+window.addEventListener('message',function(event){if(event.source!==parent)return;if(event.data==='frigochef-refresh-favorites'){state.favorites=JSON.parse(localStorage.getItem('fc_fav')||'[]');renderScreen()}});
 renderScreen();
 if("serviceWorker"`);
 }

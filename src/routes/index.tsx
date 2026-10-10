@@ -4,6 +4,8 @@ import { ArrowUpRight, ArrowRight, Check, ChefHat, Clock3, CupSoda, Heart, House
 import { Button } from '@/components/ui/button';
 import { LegacyScreen } from '@/components/legacy-screen';
 import { FridgeScreen } from '@/components/fridge-screen';
+import { RecipeScreen } from '@/components/recipe-screen';
+import { recipeCatalogue } from '@/lib/recipe-rules';
 import { quickRecipes, seasonForMonth, type HomeRecipe } from '@/lib/home-rules';
 import original from '@/lib/frigochef-original.html?raw';
 import fridge from '@/assets/fridge-sticker.png';
@@ -45,6 +47,7 @@ function Index() {
   const [recipeId,setRecipeId] = useState<number>();
   const [coursesOpen,setCoursesOpen] = useState(false);
   const [fromFridge,setFromFridge] = useState(false);
+  const [detailOpen,setDetailOpen] = useState(false);
   const [season,setSeason] = useState<keyof typeof seasonalProducts>('automne');
   useEffect(() => {
     const update = () => setSeason(seasonForMonth(new Date().getMonth()+1));
@@ -55,10 +58,13 @@ function Index() {
   },[]);
   function pickTaste(value:string) {setPreference(value);localStorage.setItem('fc_home_taste',value)}
   const list = quickRecipes(recipes,preference,season);
-  function navigate(id:string) {if(id==='courses'){setCoursesOpen(true);return;}setFromFridge(false);setScreen(id);}
+  function navigate(id:string) {if(id==='courses'){setCoursesOpen(true);return;}setDetailOpen(false);setRecipeId(undefined);setFromFridge(false);setScreen(id);window.scrollTo(0,0);}
+  function closeRecipe(){setDetailOpen(false);setRecipeId(undefined);if(screen==='recipeDetail')setScreen('accueil');const frame=document.getElementById('original-frigochef') as HTMLIFrameElement|null;frame?.contentWindow?.postMessage('frigochef-refresh-favorites','*');window.scrollTo(0,0);}
+  const selectedRecipe=recipeCatalogue.find(r=>r.id===recipeId);
   const fridgeNavigation = <nav className="home-navbar" aria-label="Navigation principale">{navItems.map(({id,name,icon:Icon})=><Button variant="navigation" key={id} aria-current={id==='frigo'?'page':undefined} onClick={()=>navigate(id)}><span className="nav-icon"><Icon/></span><span>{name}</span>{id==='frigo'&&<span className="nav-active-dot"/>}</Button>)}</nav>;
   if(screen === 'frigo') return <><FridgeScreen preference={preference} onValidate={()=>{setFromFridge(true);setScreen('recettes');}} navigation={fridgeNavigation}/>{coursesOpen&&<div className="home-modal-backdrop" onClick={()=>setCoursesOpen(false)}><div className="home-modal" role="dialog" aria-modal="true" aria-labelledby="fridge-courses-title" onClick={e=>e.stopPropagation()}><Button variant="ghost" size="icon" className="modal-close" aria-label="Fermer" onClick={()=>setCoursesOpen(false)}><X/></Button><ShoppingBasket/><h2 id="fridge-courses-title">Courses</h2><p>Cet écran n’est pas présent dans la version fournie.</p><Button onClick={()=>setCoursesOpen(false)}>Retour à Mon frigo</Button></div></div>}</>;
-  if(screen !== 'accueil') return <LegacyScreen screen={screen} recipeId={recipeId} preference={preference} fromFridge={fromFridge} onHome={() => {setFromFridge(false);setScreen('accueil');}} onFridge={()=>{setFromFridge(false);setScreen('frigo');}} />;
+  if(screen==='recipeDetail' && selectedRecipe) return <RecipeScreen key={selectedRecipe.id} recipe={selectedRecipe} onBack={closeRecipe} onNavigate={navigate}/>;
+  if(screen !== 'accueil') return <><div className={detailOpen?'recipe-legacy-hidden':undefined}><LegacyScreen screen={screen} preference={preference} fromFridge={fromFridge} onHome={() => {setFromFridge(false);setScreen('accueil');}} onFridge={()=>{setFromFridge(false);setScreen('frigo');}} onRecipe={id=>{setRecipeId(id);setDetailOpen(true);window.scrollTo(0,0);}} /></div>{detailOpen&&selectedRecipe&&<RecipeScreen key={selectedRecipe.id} recipe={selectedRecipe} onBack={closeRecipe} onNavigate={navigate}/>}</>;
   return <div className="home-shell">
     <main className="home-page">
       <header className="home-cover">
