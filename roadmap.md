@@ -1,2 +1,4 @@
 - [x] Refaire uniquement Mon frigo en conservant les ingrédients et le moteur de recettes existants.
 - [x] Vérifier saisie, catégories, dates, sauvegarde, goûts et navigation sur téléphone.
+- [ ] Refaire uniquement la fiche recette avec les données existantes, portions, favoris, courses et minuteurs.
+- [ ] Vérifier les fiches depuis l’accueil et les écrans conservés, et tester les nouvelles règles sur téléphone.
