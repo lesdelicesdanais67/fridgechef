@@ -20,7 +20,7 @@ export function FavoritesScreen({onOpen,onHome,navigation}:{onOpen:(id:number)=>
   const [sortOpen,setSortOpen]=useState(false);
   const [leaving,setLeaving]=useState<number>();
   const [undo,setUndo]=useState<{ids:number[]}>();
-  const undoTimer=useRef<number>();
+  const undoTimer=useRef<number|undefined>(undefined);
   useEffect(()=>{setIds(readArray(localStorage,'fc_fav',(v):v is number=>typeof v==='number'));setFridge(readStoredIngredients(localStorage));return ()=>window.clearTimeout(undoTimer.current);},[]);
   function save(next:number[]){setIds(next);try{localStorage.setItem('fc_fav',JSON.stringify(next));}catch{/* stockage indisponible */}}
   function remove(id:number){
