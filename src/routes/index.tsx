@@ -88,7 +88,7 @@ function Index() {
         <section className="quick-section" aria-labelledby="quick-title">
           <div className="home-section-heading"><h2 id="quick-title">Recettes rapides</h2><span className="quick-label"><Clock3/>− de 30 min</span></div>
           <p className="section-caption">Peu de préparation, beaucoup de bonheur</p>
-          <div className="quick-list">{list.map((r,index)=><Button variant="recipe" key={r.id} onClick={()=>{setRecipeId(r.id);setScreen('recipeDetail')}}><span className={`recipe-art recipe-art-${index}`}><img src={r.t==='sucré'?smoothie:index===1?appleSalad:beetSalad} alt="" width={512} height={512} loading="lazy"/></span><span className="quick-recipe-text"><span className="recipe-title">{r.n}</span><span className="recipe-time"><Clock3/>{r.m} min <span className="prep-label">de préparation</span></span></span><span className="recipe-arrow"><ArrowRight/></span></Button>)}</div>
+          <div className="quick-list">{list.map((r,index)=><Button variant="recipe" key={r.id} onClick={()=>{setRecipeId(r.id);setScreen('recipeDetail');window.scrollTo(0,0);}}><span className={`recipe-art recipe-art-${index}`}><img src={r.t==='sucré'?smoothie:index===1?appleSalad:beetSalad} alt="" width={512} height={512} loading="lazy"/></span><span className="quick-recipe-text"><span className="recipe-title">{r.n}</span><span className="recipe-time"><Clock3/>{r.m} min <span className="prep-label">de préparation</span></span></span><span className="recipe-arrow"><ArrowRight/></span></Button>)}</div>
           <div className="home-signoff"><Sparkles/><span>Un peu d’imagination, zéro gaspillage.</span></div>
         </section>
       </div>
