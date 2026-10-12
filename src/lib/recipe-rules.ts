@@ -27,7 +27,7 @@ export function stepDuration(text:string) {
 }
 export function timerRemaining(deadline:number,now:number) {return Math.max(0,Math.ceil((deadline-now)/1000));}
 export function formatTimer(seconds:number) {return `${Math.floor(seconds/60).toString().padStart(2,'0')}:${(seconds%60).toString().padStart(2,'0')}`;}
-export type ShoppingItem={name:string;quantity:string;unit:string};
+export type ShoppingItem={name:string;quantity:string;unit:string;recipe?:string;checked?:boolean;count?:number};
 export function addShoppingItem(list:ShoppingItem[],item:ShoppingItem) {
   return list.some(n=>normalizeIngredient(n.name)===normalizeIngredient(item.name))?list:[...list,item];
 }
