@@ -3,4 +3,4 @@
 - [x] Refaire uniquement la fiche recette avec les données existantes, portions, favoris, courses et minuteurs.
 - [x] Vérifier les fiches depuis l’accueil et les écrans conservés, et tester les nouvelles règles sur téléphone.- [x] Refaire uniquement l'écran Favoris (recherche, filtres, tri, retrait avec annulation, état vide).
 - [x] Refaire uniquement l'écran Recettes selon le brief envoyé.
-- [ ] Créer l'écran Courses.
+- [x] Créer l'écran Courses.
