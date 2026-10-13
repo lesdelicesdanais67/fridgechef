@@ -9,7 +9,7 @@ import { RecipesScreen } from '@/components/recipes-screen';
 import { CoursesScreen } from '@/components/courses-screen';
 import { RecipeScreen } from '@/components/recipe-screen';
 import { recipeCatalogue } from '@/lib/recipe-rules';
-import { quickRecipes, seasonForMonth, type HomeRecipe } from '@/lib/home-rules';
+import { seasonalRecipes, seasonForMonth, type HomeRecipe } from '@/lib/home-rules';
 import original from '@/lib/frigochef-original.html?raw';
 import fridge from '@/assets/fridge-sticker.png';
 import pumpkin from '@/assets/pumpkin.png';
@@ -60,7 +60,7 @@ function Index() {
     return () => window.clearInterval(interval);
   },[]);
   function pickTaste(value:string) {setPreference(value);localStorage.setItem('fc_home_taste',value)}
-  const list = quickRecipes(recipes,preference,season);
+  const list = seasonalRecipes(recipes,preference,season);
   function navigate(id:string) {setDetailOpen(false);setRecipeId(undefined);setFromFridge(false);setScreen(id);window.scrollTo(0,0);}
   function closeRecipe(){setDetailOpen(false);setRecipeId(undefined);if(screen==='recipeDetail')setScreen('accueil');const frame=document.getElementById('original-frigochef') as HTMLIFrameElement|null;frame?.contentWindow?.postMessage('frigochef-refresh-favorites','*');window.scrollTo(0,0);}
   const selectedRecipe=recipeCatalogue.find(r=>r.id===recipeId);
@@ -95,8 +95,8 @@ function Index() {
           </div>
         </section>
         <section className="quick-section" aria-labelledby="quick-title">
-          <div className="home-section-heading"><h2 id="quick-title">Recettes rapides</h2><span className="quick-label"><Clock3/>− de 30 min</span></div>
-          <p className="section-caption">Peu de préparation, beaucoup de bonheur</p>
+          <div className="home-section-heading"><h2 id="quick-title">Recettes de saison</h2><span className="quick-label"><Leaf/>{season.charAt(0).toUpperCase()+season.slice(1)}</span></div>
+          <p className="section-caption">Les saveurs du moment dans ton assiette</p>
           <div className="quick-list">{list.map((r,index)=><Button variant="recipe" key={r.id} onClick={()=>{setRecipeId(r.id);setScreen('recipeDetail');window.scrollTo(0,0);}}><span className={`recipe-art recipe-art-${index}`}><img src={r.t==='sucré'?smoothie:index===1?appleSalad:beetSalad} alt="" width={512} height={512} loading="lazy"/></span><span className="quick-recipe-text"><span className="recipe-title">{r.n}</span><span className="recipe-time"><Clock3/>{r.m} min <span className="prep-label">de préparation</span></span></span><span className="recipe-arrow"><ArrowRight/></span></Button>)}</div>
           <div className="home-signoff"><Sparkles/><span>Un peu d’imagination, zéro gaspillage.</span></div>
         </section>

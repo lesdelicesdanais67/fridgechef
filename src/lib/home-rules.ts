@@ -6,7 +6,6 @@ export function seasonForMonth(month: number) {
   return 'automne';
 }
 export type HomeRecipe = { id: number; n: string; m: number; c: number; t: string; s: string };
-export function quickRecipes(recipes: HomeRecipe[], preference: string, season: string) {
-  return recipes.filter(r => r.m < 30 && (preference === 'all' || r.t === preference))
-    .sort((a, b) => Number(b.s === season) - Number(a.s === season)).slice(0, 3);
+export function seasonalRecipes(recipes: HomeRecipe[], preference: string, season: string) {
+  return recipes.filter(r => r.s === season && (preference === 'all' || r.t === preference)).slice(0, 3);
 }
